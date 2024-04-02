@@ -10,3 +10,6 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
 - **Manager** represents the person that manages a single warehouse.
 
 - **Provider** information about the providers(suppliers) whom products are purchased. It has attributes such as provider ID, name, contact information.
+
+### ERD [NEED TO ADD ATTRIBUTES]
+![Temp ERD Diagram](https://github.com/albatranomar/inventory-management-system/blob/FirstMilestone/ERD-inventory-management-system.png?raw=true)
