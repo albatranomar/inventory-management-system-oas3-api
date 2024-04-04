@@ -11,7 +11,7 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
 
 - **Provider** information about the providers(suppliers) whom products are purchased. It has attributes such as provider ID, name, contact information.
 
-### ERD [NEED TO ADD ATTRIBUTES]
+### ERD
 ![Temp ERD Diagram](https://github.com/albatranomar/inventory-management-system/blob/FirstMilestone/ERD-inventory-management-system.png?raw=true)
 
 ### Documentation
@@ -51,7 +51,7 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
     <td class="tg-0pky">GET /stocksByTag/{tag}</td>
     <td class="tg-0pky">read</td>
     <td class="tg-0pky">gets all stocks with given tag</td>
-    <td class="tg-0pky">200 (OK): The request was successful.<br>400 (Bad Request): Invalid tag<br>404 (Not Found): Stocks with given tag is not found.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td class="tg-0pky">200 (OK): The request was successful.<br>404 (Not Found): Stocks with given tag is not found.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
     <td class="tg-0pky">GET /stocksByTag/reuseable</td>
     <td class="tg-0pky">HTTP/1.1 200<br>OK<br>{<br>[list of stocks that has the reuseable]<br>}</td>
   </tr>
