@@ -40,7 +40,7 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
     <td class="tg-0pky">HTTP/1.1 200<br>OK<br>{<br>[list of stocks]<br>}</td>
   </tr>
   <tr>
-    <td class="tg-0pky">GET /stock/{id}</td>
+    <td class="tg-0pky">GET /stocks/{id}</td>
     <td class="tg-0pky">read</td>
     <td class="tg-0pky">gets the stock with given id if exists.</td>
     <td class="tg-0pky">200 (OK): The request was successful.<br>400 (Bad Request): Invalid stock id<br>404 (Not Found): Stock not found.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
