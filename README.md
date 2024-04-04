@@ -193,3 +193,55 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
   </tr>
 </tbody>
 </table>
+
+<br>
+
+<table>
+<thead>
+  <tr>
+    <th colspan="6">Collection Resource (/providers)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>HTTP request <br>(method URI)</td>
+    <td>Operation</td>
+    <td>Description</td>
+    <td>HTTP status codes</td>
+    <td>Request sample</td>
+    <td>Respose sample</td>
+  </tr>
+  <tr>
+    <td>GET /providers</td>
+    <td>read</td>
+    <td>gets all providers in the system</td>
+    <td>200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>GET /providers</td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>[list of providers]<br>}</td>
+  </tr>
+  <tr>
+    <td>POST /providers</td>
+    <td>add</td>
+    <td>add a new provider to the system</td>
+    <td>201 (Created): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>POST /providers<br>{<br>name: “new provider”,<br>...<br>...<br><br>}</td>
+    <td>HTTP/1.1 201<br>Created<br>{<br>id: 2445<br>name: “new provider”,<br>...<br>...<br>}</td>
+  </tr>
+  <tr>
+    <td>PUT /providers/{id}</td>
+    <td>update</td>
+    <td>update a provider</td>
+    <td>200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>PUT /providers/1<br>{<br>name: “new name”,<br>}<br></td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>id: 1<br>name: “new name”,<br>...<br>...<br>}</td>
+  </tr>
+  <tr>
+    <td>DELETE /providers/{id}</td>
+    <td>delete</td>
+    <td>deletes a providersfrom the system</td>
+    <td>200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>DELETE /providers/1</td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>message: "deleted"<br>}<br></td>
+  </tr>
+</tbody>
+</table>
