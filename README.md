@@ -19,7 +19,7 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-c3ow" colspan="6">Collection Resource (/stocks)</th>
+    <th class="tg-c3ow" colspan="6">Collection Resource (/warehouses)</th>
   </tr>
 </thead>
 <tbody>
@@ -86,6 +86,66 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
     <td class="tg-0lax">200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
     <td class="tg-0lax">DELETE /stocks/1</td>
     <td class="tg-0lax">HTTP/1.1 200<br>OK<br>{<br><br>message: "deleted"<br>}</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-c3ow" colspan="6">Collection Resource (/stocks)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">HTTP request <br>(method URI)</td>
+    <td class="tg-0pky">Operation</td>
+    <td class="tg-0pky">Description</td>
+    <td class="tg-0pky">HTTP status codes</td>
+    <td class="tg-0pky">Request sample</td>
+    <td class="tg-0pky">Respose sample</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">GET /warehouses</td>
+    <td class="tg-0pky">read</td>
+    <td class="tg-0pky">gets all warehouses in the system</td>
+    <td class="tg-0pky">200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td class="tg-0pky">GET /warehouses</td>
+    <td class="tg-0pky">HTTP/1.1 200<br>OK<br>{<br>[list of warehouses]<br>}</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">GET /stocksByTag/{tag}</td>
+    <td class="tg-0pky">read</td>
+    <td class="tg-0pky">gets all stocks with given tag</td>
+    <td class="tg-0pky">200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td class="tg-0pky">GET /stocksByTag/reuseable</td>
+    <td class="tg-0pky">HTTP/1.1 200<br>OK<br>{<br>[list of stocks that has the reuseable]<br>}</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">POST /warehouses</td>
+    <td class="tg-0pky">add</td>
+    <td class="tg-0pky">add a new warehouse to the system</td>
+    <td class="tg-0pky">201 (Created): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td class="tg-0pky">POST /warehouses<br>{<br>name: “new warehouse”,<br>...<br>...<br><br>}</td>
+    <td class="tg-0pky">HTTP/1.1 201<br>Created<br>{<br>id: 2445<br>name: “new warehouse”,<br>...<br>...<br>}</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">PUT /stocks/{id}</td>
+    <td class="tg-0pky">update</td>
+    <td class="tg-0pky">update a warehouse</td>
+    <td class="tg-0pky">200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td class="tg-0pky">PUT /warehouses/1<br>{<br>name: “new name”,<br>}<br></td>
+    <td class="tg-0pky">HTTP/1.1 200<br>OK<br>{<br>id: 1<br>name: “new name”,<br>...<br>...<br>}</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">DELETE /warehouses/{id}</td>
+    <td class="tg-0pky">delete</td>
+    <td class="tg-0pky">deletes a warehouse from the system</td>
+    <td class="tg-0pky">200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td class="tg-0pky">DELETE /warehouses/1</td>
+    <td class="tg-0pky">HTTP/1.1 200<br>OK<br>{<br>message: "deleted"<br><br>}</td>
   </tr>
 </tbody>
 </table>
