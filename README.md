@@ -141,3 +141,55 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
   </tr>
 </tbody>
 </table>
+
+<br>
+
+<table>
+<thead>
+  <tr>
+    <th colspan="6">Collection Resource (/managers)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>HTTP request <br>(method URI)</td>
+    <td>Operation</td>
+    <td>Description</td>
+    <td>HTTP status codes</td>
+    <td>Request sample</td>
+    <td>Respose sample</td>
+  </tr>
+  <tr>
+    <td>GET /managers</td>
+    <td>read</td>
+    <td>gets all managers in the system</td>
+    <td>200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>GET /managers</td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>[list of managers]<br>}</td>
+  </tr>
+  <tr>
+    <td>POST /managers</td>
+    <td>add</td>
+    <td>add a new manger to the system</td>
+    <td>201 (Created): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>POST /managers<br>{<br>name: “new manager”,<br>...<br>...<br><br>}</td>
+    <td>HTTP/1.1 201<br>Created<br>{<br>id: 2445<br>name: “new manager”,<br>...<br>...<br>}</td>
+  </tr>
+  <tr>
+    <td>PUT /managers/{id}</td>
+    <td>update</td>
+    <td>update a manager</td>
+    <td>200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>PUT /managers/1<br>{<br>name: “new name”,<br>}<br></td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>id: 1<br>name: “new name”,<br>...<br>...<br>}</td>
+  </tr>
+  <tr>
+    <td>DELETE /managers/{id}</td>
+    <td>delete</td>
+    <td>deletes a manager from the system</td>
+    <td>200 (OK): The request was successful.<br>400 (Bad Request): The server cannot process the request.<br>404 (Not Found): Unavailable endpoint.<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>DELETE /managers/1</td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>message: "deleted"<br>}<br></td>
+  </tr>
+</tbody>
+</table>
