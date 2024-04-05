@@ -1,0 +1,1162 @@
+openapi: 3.1.0
+info:
+  title: Inventory Management System - OpenAPI 3.1
+  description: |-
+    This is a inventory management system server based on the OpenAPI 3.1 specification. here i am starting with the design first approach in mind! with i can improve the API in general and expose some of the new features in OAS3.
+  contact:
+    email: 1221344@student.birzeit.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Visit the github repo
+  url: https://github.com/albatranomar/inventory-management-system
+servers:
+  - url: https://localhost:8080/ims-api/v1
+tags:
+  - name: Stock
+    description: Everything about Stocks
+  - name: Warehouse
+    description: Access to warehouses
+  - name: Provider
+    description: Everything about stock providers
+  - name: Manager
+    description: Everything about warehouses managers
+paths:
+  /stocks:
+    get:
+      tags:
+        - Stock
+      summary: Gets all stocks in the system
+      description: Gets all stocks in the system
+      operationId: getAllStocks
+      responses:
+        '200':
+          description: Returns all stocks in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+        '404':
+          description: there are no stocks
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 0
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+      security:
+        - api_key: []
+    post:
+      tags: 
+        - Stock
+      summary: Adds a new stock to the system
+      description: Adds a new stock to the system
+      operationId: createStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStock'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [Invalid input]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /stocks/{id}:
+    get:
+      tags:
+        - Stock
+      summary: Gets a stock by id
+      description: stock by id
+      operationId: getStockById
+      parameters:
+        - name: id
+          in: path
+          description: ID of stock to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Returns the stock by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+        '404':
+          description: there are no stock with given id
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    put:
+      tags:
+        - Stock
+      summary: Updates a stock by id
+      description: update stock by id
+      operationId: updateStockById
+      parameters:
+        - name: id
+          in: path
+          description: ID of stock to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStock'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewStock'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Stock Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Stock with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    delete:
+      tags:
+        - Stock
+      summary: Deletes a stock by id
+      description: Deletes stock by id
+      operationId: deleteStockById
+      parameters:
+        - name: id
+          in: path
+          description: ID of stock to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Stock Deleted"]
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Invalid Input"]
+        '404':
+          description: Stock Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Stock with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+          
+  /stocksByTag/{tag}:
+    get:
+      tags:
+        - Stock
+      summary: Gets a stock by Tag
+      description: stock by tag
+      operationId: getStockByTag
+      parameters:
+        - name: tag
+          in: path
+          description: tag of stocks to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [reuseable]
+      responses:
+        '200':
+          description: Returns the stock/s by tag
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+        '404':
+          description: there are no stock with given tag
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /stocksByStatus/{status}:
+    get:
+      tags:
+        - Stock
+      summary: Gets a stock by status
+      description: stock by status
+      operationId: getStockByStatus
+      parameters:
+        - name: status
+          in: path
+          description: status of stocks to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [available]
+      responses:
+        '200':
+          description: Returns the stock/s by status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+        '404':
+          description: there are no stock with given status
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /warehouses:
+    get:
+      tags:
+        - Warehouse
+      summary: Gets all warehouses in the system
+      description: Gets all warehouses in the system
+      operationId: getAllWarehouses
+      responses:
+        '200':
+          description: Returns all warehouses in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Warehouse'
+        '404':
+          description: there are no warehouses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [there are no warehouses]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    post:
+      tags:
+        - Warehouse
+      summary: Adds new warehouse to the system
+      description: Adds new warehouse to the system
+      operationId: createWarehouse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewWarehouse'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warehouse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [Invalid input]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /warehouses/{id}:
+    get:
+      tags:
+        - Warehouse
+      summary: Gets a warehouse by id
+      description: warehouse by id
+      operationId: getWarehouseById
+      parameters:
+        - name: id
+          in: path
+          description: ID of warehouse to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Returns the warehouse by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warehouse'
+        '404':
+          description: there are no warehouse with given id
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    put:
+      tags:
+        - Warehouse
+      summary: Updates a warehouse by id
+      description: update warehouse by id
+      operationId: updateWarehouseById
+      parameters:
+        - name: id
+          in: path
+          description: ID of warehouse to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewWarehouse'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewWarehouse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Warehouse Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Warehouse with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    delete:
+      tags:
+        - Warehouse
+      summary: Deletes a warehouse by id
+      description: Deletes warehouse by id
+      operationId: deleteWarehouseById
+      parameters:
+        - name: id
+          in: path
+          description: ID of warehouse to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Warehouse Deleted"]
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Invalid Input"]
+        '404':
+          description: Warehouse Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Warehouse with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /warehouses/{id}/stocks:
+    get:
+      tags:
+        - Warehouse
+      summary: Gets a all stocks in the given warehouse by id
+      description: Gets a all stocks in the given warehouse by id
+      operationId: getStocksFromWarehouseById
+      parameters:
+        - name: id
+          in: path
+          description: ID of warehouse
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Returns the warehouse stocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+        '404':
+          description: there are no warehouse with given id
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /providers:
+    get:
+      tags:
+        - Provider
+      summary: Gets all providers in the system
+      description: Gets all providers in the system
+      operationId: getAllProviders
+      responses:
+        '200':
+          description: Returns all providers in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider'
+        '404':
+          description: there are no providers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [there are no providers]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    post:
+      tags:
+        - Provider
+      summary: Adds new provider to the system
+      description: Adds new provider to the system
+      operationId: createProvider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProvider'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [Invalid input]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /providers/{id}:
+    get:
+      tags:
+        - Provider
+      summary: Gets a provider by id
+      description: provider by id
+      operationId: getProviderById
+      parameters:
+        - name: id
+          in: path
+          description: ID of provider to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Returns the preovider by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '404':
+          description: there are no provider with given id
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    put:
+      tags:
+        - Provider
+      summary: Updates a provider by id
+      description: update provider by id
+      operationId: updateProviderById
+      parameters:
+        - name: id
+          in: path
+          description: ID of provider to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProvider'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewProvider'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Provider Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Provider with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    delete:
+      tags:
+        - Provider
+      summary: Deletes a provider by id
+      description: Deletes provider by id
+      operationId: deleteProviderById
+      parameters:
+        - name: id
+          in: path
+          description: ID of provider to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Provider Deleted"]
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Invalid Input"]
+        '404':
+          description: Provider Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Provider with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /managers:
+    get:
+      tags:
+        - Manager
+      summary: Gets all managers in the system
+      description: Gets all managers in the system
+      operationId: getAllManagers
+      responses:
+        '200':
+          description: Returns all managers in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Manager'
+        '404':
+          description: there are no managers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [there are no managers]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    post:
+      tags:
+        - Manager
+      summary: Adds new manager to the system
+      description: Adds new manager to the system
+      operationId: createManager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewManager'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manager'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: [Invalid input]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+  /managers/{id}:
+    get:
+      tags:
+        - Manager
+      summary: Gets a manager by id
+      description: manager by id
+      operationId: getManagerById
+      parameters:
+        - name: id
+          in: path
+          description: ID of manager to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Returns the manager by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manager'
+        '404':
+          description: there are no manager with given id
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    put:
+      tags:
+        - Manager
+      summary: Updates a manager by id
+      description: update manager by id
+      operationId: updateManagerById
+      parameters:
+        - name: id
+          in: path
+          description: ID of manager to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewManager'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewManager'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Manager Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Manager with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+    delete:
+      tags:
+        - Manager
+      summary: Deletes a manager by id
+      description: Deletes manager by id
+      operationId: deleteManagerById
+      parameters:
+        - name: id
+          in: path
+          description: ID of manager to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Manager Deleted"]
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Invalid Input"]
+        '404':
+          description: Manager Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    examples: ["Manager with given id is not found"]
+        '500':
+          description: The server encountered an unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    examples: ["Database error"]
+
+components:
+  schemas:
+    Stock:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          examples: [1]
+        name:
+          type: string
+          examples: ["bag"]
+        price:
+          type: number
+          examples: [12.2, 303]
+        status:
+          type: string
+          examples: [available]
+          enum:
+            - available
+            - unavailable
+            - pending
+        tags:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          examples: [["reuseable"]]
+        availableQuantity:
+          type: integer
+          format: int64
+          examples: [12]
+    NewStock:
+      type: object
+      properties:
+        name:
+          type: string
+          examples: ["bag"]
+        price:
+          type: number
+          examples: [12.2, 303]
+        status:
+          type: string
+          examples: [available]
+          enum:
+            - available
+            - unavailable
+            - pending
+        tags:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          examples: [["reuseable"]]
+        availableQuantity:
+          type: integer
+          format: int64
+          examples: [12]
+    Warehouse:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          examples: [1]
+        name: 
+          type: string
+          examples: [alnoor]
+        location:
+          type: string
+          examples: [Ramallah]
+    NewWarehouse:
+      type: object
+      properties:
+        name: 
+          type: string
+          examples: [alnoor]
+        location:
+          type: string
+          examples: [Ramallah]
+    Provider:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          examples: [1]
+        name: 
+          type: string
+          examples: [alnoor]
+        type:
+          type: string
+          examples: [Person, Company]
+    NewProvider:
+      type: object
+      properties:
+        name: 
+          type: string
+          examples: [alnoor]
+        type:
+          type: string
+          examples: [Person, Company]
+    Manager:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          examples: [1]
+        name: 
+          type: string
+          examples: [alnoor]
+        phone_number:
+          type: string
+          examples: [0599658978]
+    NewManager:
+      type: object
+      properties:
+        name: 
+          type: string
+          examples: [alnoor]
+        phone_number:
+          type: string
+          examples: [0599658978]
