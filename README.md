@@ -277,3 +277,8 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
   </tr>
 </tbody>
 </table>
+
+
+### OpenAPI Specification Swagger
+You can access the specification by following the link [// LINK FOR SWAGGER HUB //]
+or head to 'inventory-management-system-openapi3_1.yaml' in this repo
