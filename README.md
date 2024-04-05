@@ -280,5 +280,5 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
 
 
 ### OpenAPI Specification Swagger
-You can access the specification by following the link [// LINK FOR SWAGGER HUB //]
+You can access the specification by following the link [Inventory Management System](https://app.swaggerhub.com/apis/ALBATRANOMAR943/inventory-management-system/1.0.0)
 or head to 'inventory-management-system-openapi3_1.yaml' in this repo
