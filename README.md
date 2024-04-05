@@ -132,6 +132,14 @@ This project is a part of `COMP4382, SP.TOP: WEB SERVICES TECHNOLOGY` Course fro
     <td>HTTP/1.1 200<br>OK<br>{<br>[list of managers]<br>}</td>
   </tr>
   <tr>
+    <td>GET /warehouses/{id}/stocks</td>
+    <td>read</td>
+    <td>Gets a all stocks in the given warehouse by id</td>
+    <td>200 (OK): The request was successful.<br>404 (Not Found): warehouse not found<br>500 (Internal Server Error): The server encountered an unexpected error.</td>
+    <td>GET /warehouses/1/stocks</td>
+    <td>HTTP/1.1 200<br>OK<br>{<br>[list of stocks]<br>}</td>
+  </tr>
+  <tr>
     <td class="tg-0pky">PUT /warehouses/{id}</td>
     <td class="tg-0pky">update</td>
     <td class="tg-0pky">update a warehouse</td>
