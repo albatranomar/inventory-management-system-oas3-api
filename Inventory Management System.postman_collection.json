@@ -15,18 +15,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocks",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocks",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocks"
 							]
-						}
+						},
+						"description": "Gets all stocks in the system"
 					},
 					"response": []
 				},
@@ -45,18 +42,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocks",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocks",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocks"
 							]
-						}
+						},
+						"description": "Adds a new stock to the system"
 					},
 					"response": []
 				},
@@ -66,19 +60,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocks/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocks/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocks",
 								"1"
 							]
-						}
+						},
+						"description": "Gets a stock by id"
 					},
 					"response": []
 				},
@@ -97,19 +88,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocks/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocks/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocks",
 								"1"
 							]
-						}
+						},
+						"description": "Updates a stock by id"
 					},
 					"response": []
 				},
@@ -119,19 +107,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocks/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocks/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocks",
 								"1"
 							]
-						}
+						},
+						"description": "Deletes a stock by id"
 					},
 					"response": []
 				},
@@ -141,19 +126,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocksByTag/reuseable",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocksByTag/reuseable",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocksByTag",
 								"reuseable"
 							]
-						}
+						},
+						"description": "Gets a stock by Tag"
 					},
 					"response": []
 				},
@@ -163,19 +145,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/stocksByStatus/AVAILABLE",
-							"protocol": "http",
+							"raw": "{{api_url}}/stocksByStatus/AVAILABLE",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"stocksByStatus",
 								"AVAILABLE"
 							]
-						}
+						},
+						"description": "Gets a stock by status"
 					},
 					"response": []
 				}
@@ -191,19 +170,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								""
 							]
-						}
+						},
+						"description": "Gets all warehouses in the system"
 					},
 					"response": []
 				},
@@ -222,19 +198,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								""
 							]
-						}
+						},
+						"description": "Adds new warehouse to the system"
 					},
 					"response": []
 				},
@@ -244,19 +217,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								"1"
 							]
-						}
+						},
+						"description": "Gets a warehouse by id"
 					},
 					"response": []
 				},
@@ -275,19 +245,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								"1"
 							]
-						}
+						},
+						"description": "update warehouse by id"
 					},
 					"response": []
 				},
@@ -297,19 +264,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								"1"
 							]
-						}
+						},
+						"description": "Deletes warehouse by id"
 					},
 					"response": []
 				},
@@ -319,20 +283,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/1/stocks",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/1/stocks",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								"1",
 								"stocks"
 							]
-						}
+						},
+						"description": "Gets a all stocks in the given warehouse by id"
 					},
 					"response": []
 				},
@@ -342,25 +303,23 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/1/linkStock/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/warehouses/1/linkStock/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"warehouses",
 								"1",
 								"linkStock",
 								"1"
 							]
-						}
+						},
+						"description": "Link a stock to spicific warehouse"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Access to warehouses"
 		},
 		{
 			"name": "Provider",
@@ -371,19 +330,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/providers/",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"providers",
 								""
 							]
-						}
+						},
+						"description": "Gets all providers in the system"
 					},
 					"response": []
 				},
@@ -402,19 +358,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/providers/",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"providers",
 								""
 							]
-						}
+						},
+						"description": "Adds new provider to the system"
 					},
 					"response": []
 				},
@@ -424,19 +377,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/providers/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"providers",
 								"1"
 							]
-						}
+						},
+						"description": "Gets a provider by id"
 					},
 					"response": []
 				},
@@ -455,19 +405,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/providers/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"providers",
 								"1"
 							]
-						}
+						},
+						"description": "update provider by id"
 					},
 					"response": []
 				},
@@ -477,19 +424,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/warehouses/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
-								"warehouses",
+								"providers",
 								"1"
 							]
-						}
+						},
+						"description": "Deletes provider by id"
 					},
 					"response": []
 				},
@@ -499,20 +443,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/providers/1/stocks",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/1/stocks",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"providers",
 								"1",
 								"stocks"
 							]
-						}
+						},
+						"description": "Gets a all stocks provided by spicific provider"
 					},
 					"response": []
 				},
@@ -522,25 +463,23 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/providers/1/linkStock/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/providers/1/linkStock/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"providers",
 								"1",
 								"linkStock",
 								"1"
 							]
-						}
+						},
+						"description": "Link a stock to spicific warehouse"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Everything about stock providers"
 		},
 		{
 			"name": "Manager",
@@ -551,19 +490,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/managers/",
-							"protocol": "http",
+							"raw": "{{api_url}}/managers/",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"managers",
 								""
 							]
-						}
+						},
+						"description": "Gets all managers in the system"
 					},
 					"response": []
 				},
@@ -582,19 +518,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/managers/",
-							"protocol": "http",
+							"raw": "{{api_url}}/managers/",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"managers",
 								""
 							]
-						}
+						},
+						"description": "Adds new manager to the system"
 					},
 					"response": []
 				},
@@ -604,19 +537,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/managers/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/managers/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"managers",
 								"1"
 							]
-						}
+						},
+						"description": "Gets a manager by id"
 					},
 					"response": []
 				},
@@ -635,19 +565,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/managers/1",
-							"protocol": "http",
+							"raw": "{{api_url}}/managers/1",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"managers",
 								"1"
 							]
-						}
+						},
+						"description": "Updates a manager by id"
 					},
 					"response": []
 				},
@@ -657,23 +584,50 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/ims-api/v1/managers/2",
-							"protocol": "http",
+							"raw": "{{api_url}}/managers/2",
 							"host": [
-								"localhost"
+								"{{api_url}}"
 							],
-							"port": "9090",
 							"path": [
-								"ims-api",
-								"v1",
 								"managers",
 								"2"
 							]
-						}
+						},
+						"description": "Deletes a manager by id"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Everything about warehouses managers"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:9090/ims-api/v1",
+			"type": "string"
 		}
 	]
 }
