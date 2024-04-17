@@ -2,8 +2,6 @@ package com.ims.controller;
 
 import com.ims.dto.DManager;
 import com.ims.dto.DNewManager;
-import com.ims.dto.DNewProvider;
-import com.ims.dto.DProvider;
 import com.ims.exception.BadRequestException;
 import com.ims.exception.ResourceNotFoundException;
 import com.ims.service.ManagerService;
@@ -22,7 +20,7 @@ public class ManagerController {
     private ManagerService managerService;
 
     @GetMapping("/")
-    public ResponseEntity<List<DManager>> getAllProviders() {
+    public ResponseEntity<List<DManager>> getAllManagers() {
         List<DManager> managers = managerService.getAllManagers();
         if (managers.size() == 0) {
             throw new ResourceNotFoundException("Managers not found(there is currently no managers)");

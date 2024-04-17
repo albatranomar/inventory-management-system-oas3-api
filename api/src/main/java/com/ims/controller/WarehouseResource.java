@@ -1,6 +1,5 @@
 package com.ims.controller;
 
-import com.ims.dto.DNewStock;
 import com.ims.dto.DNewWarehouse;
 import com.ims.dto.DStock;
 import com.ims.dto.DWarehouse;
