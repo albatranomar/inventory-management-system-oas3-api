@@ -13,7 +13,7 @@ externalDocs:
   description: Visit the github repo
   url: https://github.com/albatranomar/inventory-management-system
 servers:
-  - url: https://localhost:8080/ims-api/v1
+  - url: https://localhost:9090/ims-api/v1
 tags:
   - name: Stock
     description: Everything about Stocks
@@ -33,30 +33,23 @@ paths:
       operationId: getAllStocks
       responses:
         '200':
-          description: Returns all stocks in the system
+          description: The stocks was successfully acquired.
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Stock'
+        '403':
+          description: The client doesn't have access to the stocks
         '404':
-          description: there are no stocks
-          content:
-            application/json:
-              schema:
-                type: array
-                maxItems: 0
+          description: Stocks not found.
+        '410':
+          description: The stocks are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while processing the stocks.
+        '504':
+          description: Unable to process the stocks in time
       security:
         - api_key: []
     post:
@@ -78,25 +71,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Stock'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: [Invalid input]
+          description: Invaild stock data provided
+        '401':
+          description: The client is unauthorized. the stock was not created
+        '409':
+          description: The stock provided will conflict the resources on the server
+        '415':
+          description: Content-type of the request is not supported by this server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while creating the stock
   /stocks/{id}:
     get:
       tags:
@@ -115,27 +98,21 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Returns the stock by id
+          description: The stock was successfully acquired
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Stock'
+        '403':
+          description: The client doesn't have access to this stock
         '404':
-          description: there are no stock with given id
-          content:
-            application/json:
-              schema:
-                type: object
+          description:  Stock with spicified id not found
+        '410':
+          description: The stock with spicified id are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered while processing the stock
+        '504':
+          description: Unable to process the spicified stock in time
     put:
       tags:
         - Stock
@@ -158,37 +135,22 @@ paths:
               $ref: '#/components/schemas/NewStock'
       responses:
         '200':
-          description: Updated
+          description: The stock was successfully updated.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NewStock'
+                $ref: '#/components/schemas/Stock'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
+          description: Invalid stock id
+        '401':
+          description:  The client is unauthorized. the stock was not updated
         '404':
-          description: Stock Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Stock with given id is not found"]
+          description: Stock with given id is not found
+        '409':
+          description: The new stock data provided will conflict the resources on the server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while updating the stock.
+
     delete:
       tags:
         - Stock
@@ -206,45 +168,22 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Deleted
+          description: The stock was successfully deleted
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Stock Deleted"]
+                type: string
+                examples: [The stock was successfully deleted]
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Invalid Input"]
+          description: Invalid stock id
+        '401':
+          description:  The client is unauthorized. the stock was not deleted
+        '403':
+          description: The client doesn't have access to spicified stock. Was unable to deleted
         '404':
           description: Stock Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Stock with given id is not found"]
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while deleting the stock
           
   /stocksByTag/{tag}:
     get:
@@ -264,29 +203,23 @@ paths:
             examples: [reuseable]
       responses:
         '200':
-          description: Returns the stock/s by tag
+          description: The stocks with spicified tag were successfully acquired
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Stock'
+        '403':
+          description: The client doesn't have access to spicified stocks
         '404':
           description: there are no stock with given tag
-          content:
-            application/json:
-              schema:
-                type: object
+        '410':
+          description: The stocks with spicified tag are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered while processing the stocks
+        '504':
+          description: Unable to process the spicified stocks in time
   /stocksByStatus/{status}:
     get:
       tags:
@@ -305,29 +238,23 @@ paths:
             examples: [available]
       responses:
         '200':
-          description: Returns the stock/s by status
+          description:  The stocks with spicified status were successfully acquired
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Stock'
+        '403':
+          description: The client doesn't have access to spicified stocks
         '404':
           description: there are no stock with given status
-          content:
-            application/json:
-              schema:
-                type: object
+        '410':
+          description: The stocks with spicified status are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while processing the stocks
+        '504':
+          description: Unable to process the spicified stocks in time
   /warehouses:
     get:
       tags:
@@ -337,33 +264,23 @@ paths:
       operationId: getAllWarehouses
       responses:
         '200':
-          description: Returns all warehouses in the system
+          description: The warehouses was successfully acquired
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Warehouse'
+        '403':
+          description: The client doesn't have access to the warehouses
         '404':
           description: there are no warehouses
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: [there are no warehouses]
+        '410':
+          description: The warehouses are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered while processing the warehouses
+        '504':
+          description: Unable to process the warehouses in time
     post:
       tags:
         - Warehouse
@@ -377,31 +294,21 @@ paths:
               $ref: '#/components/schemas/NewWarehouse'
       responses:
         '201':
-          description: Created
+          description: The warehouse was successfully created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Warehouse'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: [Invalid input]
+          description: Invaild warehouse data provided
+        '401':
+          description: The client is unauthorized. the warehouse was not created
+        '409':
+          description: The warehouse provided will conflict the resources on the server
+        '415':
+          description: Content-type of the request is not supported by this server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while creating the warehouse
   /warehouses/{id}:
     get:
       tags:
@@ -420,27 +327,21 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Returns the warehouse by id
+          description: The warehouse was successfully acquired
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Warehouse'
+        '403':
+          description: The client doesn't have access to this warehouse
         '404':
           description: there are no warehouse with given id
-          content:
-            application/json:
-              schema:
-                type: object
+        '410':
+          description: The warehouse with spicified id are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while processing the warehouse
+        '504':
+          description: Unable to process the spicified warehouse in time
     put:
       tags:
         - Warehouse
@@ -463,37 +364,21 @@ paths:
               $ref: '#/components/schemas/NewWarehouse'
       responses:
         '200':
-          description: Updated
+          description: The warehouse was successfully updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NewWarehouse'
+                $ref: '#/components/schemas/Warehouse'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
+          description: Invalid warehouse id
+        '401':
+          description: The client is unauthorized. the warehouse was not updated
         '404':
-          description: Warehouse Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Warehouse with given id is not found"]
+          description: Warehouse with spicified id not found
+        '409':
+          description: The new warehouse data provided will conflict the resources on the server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while updating the warehouse
     delete:
       tags:
         - Warehouse
@@ -511,45 +396,22 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Deleted
+          description: The warehouse was successfully deleted
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Warehouse Deleted"]
+                type: string
+                examples: ["The warehouse was successfully deleted"]
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Invalid Input"]
+          description: Invalid warehouse id
+        '401':
+          description:  The client is unauthorized. the warehouse was not deleted
+        '403':
+          description:  The client doesn't have access to spicified warehouse. Was unable to deleted
         '404':
           description: Warehouse Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Warehouse with given id is not found"]
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while deleting the warehouse
   /warehouses/{id}/stocks:
     get:
       tags:
@@ -568,29 +430,65 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Returns the warehouse stocks
+          description: The stocks was successfully acquired.
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Stock'
+        '403':
+          description: The client doesn't have access to the stocks
         '404':
-          description: there are no warehouse with given id
-          content:
-            application/json:
-              schema:
-                type: object
+          description: Stocks not found.
+        '410':
+          description: The stocks are no longer available
         '500':
-          description: The server encountered an unexpected error
+          description: The server encountered an unexpected error while processing the stocks.
+        '504':
+          description: Unable to process the stocks in time
+  /warehouses/{id}/linkStock/{stock_id}:
+    put:
+      tags:
+        - Warehouse
+      summary: Link a stock to spicific warehouse
+      description: Link a stock to spicific warehouse
+      operationId: linkStock
+      parameters:
+        - name: id
+          in: path
+          description: ID of warehouse to link
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+        - name: stock_id
+          in: path
+          description: ID of stock to link
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: The stock was successfully linked with the warehouse
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+                type: string
+                examples: [The stock was successfully linked with the warehouse]
+        '400':
+          description: Invalid warehouse or stock id
+        '401':
+          description: The client is unauthorized. the warehouse was not linked with the stock
+        '404':
+          description: Warehouse or Stock with spicified id not found
+        '409':
+          description: The link will conflict the resources on the server
+        '500':
+          description: The server encountered an unexpected error while linking the warehouse
   /providers:
     get:
       tags:
@@ -600,33 +498,23 @@ paths:
       operationId: getAllProviders
       responses:
         '200':
-          description: Returns all providers in the system
+          description: The providers were successfully acquired
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Provider'
+        '403':
+          description: The client doesn't have access to the providers
         '404':
           description: there are no providers
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: [there are no providers]
+        '410':
+          description: The providers are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while  processing the providers
+        '504':
+          description:  Unable to process the providers in time
     post:
       tags:
         - Provider
@@ -640,31 +528,21 @@ paths:
               $ref: '#/components/schemas/NewProvider'
       responses:
         '201':
-          description: Created
+          description: The provider was successfully created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Provider'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: [Invalid input]
+          description: Invaild data for the provider
+        '401':
+          description: The client is unauthorized. the provider was not created
+        '409':
+          description: The given provider will conflict the resources on the server
+        '415':
+          description: Content-type of the request is not supported by this server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while creating the provider
   /providers/{id}:
     get:
       tags:
@@ -683,27 +561,21 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Returns the preovider by id
+          description: The provider was successfully acquired
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Provider'
+        '403':
+          description: The client doesn't have access to this provider
         '404':
           description: there are no provider with given id
-          content:
-            application/json:
-              schema:
-                type: object
+        '410':
+          description: The provider with spicified id are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while processing the provider
+        '504':
+          description: Unable to process the spicified provider in time
     put:
       tags:
         - Provider
@@ -726,37 +598,21 @@ paths:
               $ref: '#/components/schemas/NewProvider'
       responses:
         '200':
-          description: Updated
+          description: The provider was successfully updated
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NewProvider'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
+          description: Invalid provider id
+        '401':
+          description: The client is unauthorized. the provider was not updated
         '404':
           description: Provider Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Provider with given id is not found"]
+        '409':
+          description: The new provider data will conflict the resources on the server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while updating the provider
     delete:
       tags:
         - Provider
@@ -774,45 +630,64 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Deleted
+          description: The provider was successfully deleted
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Provider Deleted"]
+                type: string
+                examples: ["The provider was successfully deleted"]
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Invalid Input"]
+          description: Invalid provider id
+        '401':
+          description: The client is unauthorized. the provider was not deleted
+        '403':
+          description: The client doesn't have access to spicified provider. Was unable to deleted
         '404':
           description: Provider Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    examples: ["Provider with given id is not found"]
         '500':
-          description: The server encountered an unexpected error
+          description: The server encountered an unexpected error while deleting the provider
+  /providers/{id}/linkStock/{stock_id}:
+    put:
+      tags:
+        - Provider
+      summary: Link a stock to spicific warehouse
+      description: Link a stock to spicific warehouse
+      operationId: linkStockProvider
+      parameters:
+        - name: id
+          in: path
+          description: ID of provider to link
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+        - name: stock_id
+          in: path
+          description: ID of stock to link
+          required: true
+          schema:
+            type: integer
+            format: int64
+            examples: [1]
+      responses:
+        '200':
+          description: The stock was successfully linked with the warehouse
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+                type: string
+                examples: [The stock was successfully linked with the provider]
+        '400':
+          description: Invalid warehouse or stock id
+        '401':
+          description: The client is unauthorized. the warehouse was not linked with the stock
+        '404':
+          description: Warehouse or Stock with spicified id not found
+        '409':
+          description: The link will conflict the resources on the server
+        '500':
+          description: The server encountered an unexpected error while linking the warehouse
   /managers:
     get:
       tags:
@@ -822,13 +697,15 @@ paths:
       operationId: getAllManagers
       responses:
         '200':
-          description: Returns all managers in the system
+          description: The managers were successfully acquired
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Manager'
+        '403':
+          description: The client doesn't have access to the managers
         '404':
           description: there are no managers
           content:
@@ -839,16 +716,12 @@ paths:
                   message: 
                     type: string
                     examples: [there are no managers]
+        '410':
+          description:  The managers are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while processing the managers
+        '504':
+          description: Unable to process the managers in time
     post:
       tags:
         - Manager
@@ -862,13 +735,13 @@ paths:
               $ref: '#/components/schemas/NewManager'
       responses:
         '201':
-          description: Created
+          description: The manager was successfully created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Manager'
         '400':
-          description: Invalid Input
+          description: Invaild manager data provided
           content:
             application/json:
               schema:
@@ -876,17 +749,15 @@ paths:
                 properties:
                   message: 
                     type: string
-                    examples: [Invalid input]
+                    examples: [Invaild manager data provided]
+        '401':
+          description: The client is unauthorized. the manager was not created
+        '409':
+          description: The manager provided will conflict the resources on the server
+        '415':
+          description: Content-type of the request is not supported by this server.
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while creating the manager
   /managers/{id}:
     get:
       tags:
@@ -905,27 +776,21 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Returns the manager by id
+          description: The manager was successfully acquired
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Manager'
+        '403':
+          description: The client doesn't have access to this manager
         '404':
           description: there are no manager with given id
-          content:
-            application/json:
-              schema:
-                type: object
+        '410':
+          description: The manager with spicified id are no longer available
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while processing the manager
+        '504': 
+          description: Unable to process the spicified manager in time
     put:
       tags:
         - Manager
@@ -948,17 +813,15 @@ paths:
               $ref: '#/components/schemas/NewManager'
       responses:
         '200':
-          description: Updated
+          description: The manager was successfully updated
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NewManager'
         '400':
-          description: Invalid Input
-          content:
-            application/json:
-              schema:
-                type: object
+          description: Invalid Manager ID
+        '401':
+          description: The client is unauthorized. the manager was not updated
         '404':
           description: Manager Not Found
           content:
@@ -969,16 +832,10 @@ paths:
                   message: 
                     type: string
                     examples: ["Manager with given id is not found"]
+        '409': 
+          description: The new manager data provided will conflict the resources on the server
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
+          description: The server encountered an unexpected error while updating the manager
     delete:
       tags:
         - Manager
@@ -996,7 +853,7 @@ paths:
             examples: [1]
       responses:
         '200':
-          description: Deleted
+          description: The manager was successfully deleted
           content:
             application/json:
               schema:
@@ -1004,9 +861,9 @@ paths:
                 properties:
                   message: 
                     type: string
-                    examples: ["Manager Deleted"]
+                    examples: ["The manager was successfully deleted"]
         '400':
-          description: Invalid Input
+          description: Invalid manager id
           content:
             application/json:
               schema:
@@ -1014,7 +871,11 @@ paths:
                 properties:
                   message: 
                     type: string
-                    examples: ["Invalid Input"]
+                    examples: ["Invalid manager id"]
+        '401':
+          description: The client is unauthorized. the manager was not deleted
+        '403':
+          description: The client doesn't have access to spicified manager. Was unable to deleted
         '404':
           description: Manager Not Found
           content:
@@ -1026,16 +887,7 @@ paths:
                     type: string
                     examples: ["Manager with given id is not found"]
         '500':
-          description: The server encountered an unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    examples: ["Database error"]
-
+          description: The server encountered an unexpected error while deleting the manager
 components:
   schemas:
     Stock:
@@ -1079,11 +931,13 @@ components:
           examples: [12.2, 303]
         status:
           type: string
-          examples: [available]
+          examples: [AVAILABLE]
           enum:
-            - available
-            - unavailable
-            - pending
+            - AVAILABLE
+            - RESERVED
+            - OUT_OF_STOCK
+            - DAMAGED
+            - DISCONTINUED
         tags:
           type: array
           items:
@@ -1107,6 +961,10 @@ components:
         location:
           type: string
           examples: [Ramallah]
+        manager_id: 
+          type: integer
+          format: int64
+          examples: [1]
     NewWarehouse:
       type: object
       properties:
@@ -1116,6 +974,10 @@ components:
         location:
           type: string
           examples: [Ramallah]
+        manager_id: 
+          type: integer
+          format: int64
+          examples: [1]
     Provider:
       type: object
       properties:

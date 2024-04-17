@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "163a52f1-bff3-480f-aca9-f448efa3a9f8",
+		"name": "Inventory Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33417484"
+	},
+	"item": [
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "stocks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stocks",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocks"
+							]
+						},
+						"description": "Gets all stocks in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "stocks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomProduct}}\",\r\n  \"price\": {{$randomPrice}},\r\n  \"status\": \"AVAILABLE\",\r\n  \"tags\": [\r\n    \"{{$randomProductAdjective}}\",\r\n    \"{{$randomProductAdjective}}\",\r\n    \"{{$randomProductAdjective}}\"\r\n  ],\r\n  \"availableQuantity\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/stocks",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocks"
+							]
+						},
+						"description": "Adds a new stock to the system"
+					},
+					"response": []
+				},
+				{
+					"name": "stocks/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stocks/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocks",
+								"1"
+							]
+						},
+						"description": "Gets a stock by id"
+					},
+					"response": []
+				},
+				{
+					"name": "stocks/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomProduct}}\",\r\n  \"price\": {{$randomPrice}},\r\n  \"status\": \"AVAILABLE\",\r\n  \"tags\": [\r\n    \"{{$randomProductAdjective}}\",\r\n    \"{{$randomProductAdjective}}\",\r\n    \"{{$randomProductAdjective}}\"\r\n  ],\r\n  \"availableQuantity\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/stocks/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocks",
+								"1"
+							]
+						},
+						"description": "Updates a stock by id"
+					},
+					"response": []
+				},
+				{
+					"name": "stocks/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stocks/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocks",
+								"1"
+							]
+						},
+						"description": "Deletes a stock by id"
+					},
+					"response": []
+				},
+				{
+					"name": "stocksByTag/{tag}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stocksByTag/reuseable",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocksByTag",
+								"reuseable"
+							]
+						},
+						"description": "Gets a stock by Tag"
+					},
+					"response": []
+				},
+				{
+					"name": "stocksByStatus/{status}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stocksByStatus/AVAILABLE",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stocksByStatus",
+								"AVAILABLE"
+							]
+						},
+						"description": "Gets a stock by status"
+					},
+					"response": []
+				}
+			],
+			"description": "Everything about Stocks"
+		},
+		{
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "warehouses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/warehouses/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								""
+							]
+						},
+						"description": "Gets all warehouses in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "warehouses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomCity}}\",\r\n  \"location\": \"{{$randomStreetAddress}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/warehouses/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								""
+							]
+						},
+						"description": "Adds new warehouse to the system"
+					},
+					"response": []
+				},
+				{
+					"name": "warehouses/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/warehouses/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								"1"
+							]
+						},
+						"description": "Gets a warehouse by id"
+					},
+					"response": []
+				},
+				{
+					"name": "warehouses/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomCity}}\",\r\n  \"location\": \"{{$randomCity}}\",\r\n  \"manager_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/warehouses/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								"1"
+							]
+						},
+						"description": "update warehouse by id"
+					},
+					"response": []
+				},
+				{
+					"name": "warehouses/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/warehouses/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								"1"
+							]
+						},
+						"description": "Deletes warehouse by id"
+					},
+					"response": []
+				},
+				{
+					"name": "warehouses/{id}/stocks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/warehouses/1/stocks",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								"1",
+								"stocks"
+							]
+						},
+						"description": "Gets a all stocks in the given warehouse by id"
+					},
+					"response": []
+				},
+				{
+					"name": "warehouses/{id}/linkStock/{stock_id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/warehouses/1/linkStock/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"warehouses",
+								"1",
+								"linkStock",
+								"1"
+							]
+						},
+						"description": "Link a stock to spicific warehouse"
+					},
+					"response": []
+				}
+			],
+			"description": "Access to warehouses"
+		},
+		{
+			"name": "Provider",
+			"item": [
+				{
+					"name": "providers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/providers/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								""
+							]
+						},
+						"description": "Gets all providers in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "providers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomCompanyName}}\",\r\n  \"type\": \"company\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/providers/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								""
+							]
+						},
+						"description": "Adds new provider to the system"
+					},
+					"response": []
+				},
+				{
+					"name": "providers/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/providers/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								"1"
+							]
+						},
+						"description": "Gets a provider by id"
+					},
+					"response": []
+				},
+				{
+					"name": "providers/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomCompanyName}}\",\r\n  \"type\": \"company\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/providers/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								"1"
+							]
+						},
+						"description": "update provider by id"
+					},
+					"response": []
+				},
+				{
+					"name": "providers/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/providers/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								"1"
+							]
+						},
+						"description": "Deletes provider by id"
+					},
+					"response": []
+				},
+				{
+					"name": "providers/{id}/stocks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/providers/1/stocks",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								"1",
+								"stocks"
+							]
+						},
+						"description": "Gets a all stocks provided by spicific provider"
+					},
+					"response": []
+				},
+				{
+					"name": "providers/{id}/linkStock/{stock_id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/providers/1/linkStock/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"providers",
+								"1",
+								"linkStock",
+								"1"
+							]
+						},
+						"description": "Link a stock to spicific warehouse"
+					},
+					"response": []
+				}
+			],
+			"description": "Everything about stock providers"
+		},
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "managers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/managers/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"managers",
+								""
+							]
+						},
+						"description": "Gets all managers in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "managers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomFirstName}}\",\r\n  \"phone_number\": \"{{$randomPhoneNumber}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/managers/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"managers",
+								""
+							]
+						},
+						"description": "Adds new manager to the system"
+					},
+					"response": []
+				},
+				{
+					"name": "managers/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/managers/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"managers",
+								"1"
+							]
+						},
+						"description": "Gets a manager by id"
+					},
+					"response": []
+				},
+				{
+					"name": "managers/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomFirstName}}\",\r\n  \"phone_number\": \"{{$randomPhoneNumber}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/managers/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"managers",
+								"1"
+							]
+						},
+						"description": "Updates a manager by id"
+					},
+					"response": []
+				},
+				{
+					"name": "managers/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/managers/2",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"managers",
+								"2"
+							]
+						},
+						"description": "Deletes a manager by id"
+					},
+					"response": []
+				}
+			],
+			"description": "Everything about warehouses managers"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:9090/ims-api/v1",
+			"type": "string"
+		}
+	]
+}
